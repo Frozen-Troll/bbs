@@ -1,0 +1,24 @@
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+.example-full-width {
+  width: 100%;
+}
+.title{
+  font-size: 38px;
+  text-align: center;
+  height: 56px;
+  line-height: 56px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.login{
+  float: left;
+  margin-left: 60px;
+}
+.register{
+  float: right;
+  margin-right: 400px;
+}

@@ -1,0 +1,9 @@
+<div>
+  <p>标题</p>
+  <input #postTitle />
+  <p>正文</p>
+  <textarea #postContent></textarea>
+  <button mat-raised-button color="primary"
+    (click)="pullPost(postTitle.value,postContent.value,postContent.value)">发表新帖</button>
+  <button mat-raised-button color="primary" (click)="goBack()">返回</button>
+</div>

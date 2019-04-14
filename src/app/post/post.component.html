@@ -1,0 +1,34 @@
+<div>
+  <h2 style="text-align:center">欢迎来到开花论坛</h2>
+  <ul>
+    <li>
+      <mat-card style="background:rgb(27, 158, 240)">
+        <mat-card-content>
+          <span>标题</span>
+          <span style="float:right">开贴时间</span>
+        </mat-card-content>
+      </mat-card>
+    </li>
+    <li *ngFor="let post of posts">
+      <mat-card tabindex="0" routerLink="/detail/{{post.id}}" style="background:rgb(120, 196, 243)">
+        <mat-card-content>
+          <span>{{post.title}}</span>
+          <span style="float:right">{{post.initTime}}</span>
+        </mat-card-content>
+      </mat-card>
+    </li>
+  </ul>
+  <div>
+    <button mat-raised-button color="primary" routerLink="/post/pull">发帖</button>
+  </div>
+  <hr />
+  <div>
+    <p>标题</p>
+    <input #postTitle />
+    <p>正文</p>
+    <textarea #postContent></textarea>
+    <button mat-raised-button color="primary"
+      (click)="pullPost(postTitle.value,postContent.value,postContent.value)">发表新帖</button>
+    <button mat-raised-button color="primary" (click)="goBack()">返回</button>
+  </div>
+</div>

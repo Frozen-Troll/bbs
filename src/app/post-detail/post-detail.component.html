@@ -1,0 +1,65 @@
+<b class="title">{{post.title}}</b>
+<button mat-raised-button color="primary" (click)="goBack()" style="float:right">返回</button>
+<table style="width:100%">
+  <tbody>
+    <div>
+      <tr>
+        <td style="vertical-align:top" class="left">
+          <span>
+            <div>
+              <span>楼主:</span>
+            </div>
+            <div style="text-align:center">
+              <span>{{post.author}}</span>
+            </div>
+          </span>
+        </td>
+        <mat-divider [vertical]="true">
+        </mat-divider>
+        <td class="right">
+          <div style="text-align:right">
+            <span style="font-size:15px">{{post.initTime}}</span>
+          </div>
+          <span>{{post.content}}</span>
+        </td>
+      </tr>
+      <mat-divider style="width:100%"></mat-divider>
+    </div>
+    <div *ngFor="let posts of responsePosts">
+      <tr>
+        <td style="vertical-align:top" class="left">
+          <span>
+            <div style="text-align:center">
+              <span>{{posts.author}}</span>
+            </div>
+          </span>
+        </td>
+        <mat-divider [vertical]="true">
+        </mat-divider>
+        <td class="right">
+          <div style="text-align:right">
+            <span style="font-size:15px">{{posts.initTime}}</span>
+          </div>
+          <span>{{posts.content}}</span>
+        </td>
+      </tr>
+      <mat-divider></mat-divider>
+    </div>
+  </tbody>
+</table>
+<hr />
+<div name="res" id="res">
+  <div style="padding-top:40px">
+    <mat-card tabindex="0" style="background:rgb(120, 196, 243)" class="mat-card">
+      <mat-card-content >
+        <img src="../../assets/icon/pen.png" width="20" height="20"/>
+        <span class="responseTitle">发表回复</span>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <textarea #content></textarea>
+  <div style="text-align:center">  
+    <button mat-raised-button color="primary" (click)="commit(content.value,content.value)">提交</button>
+  </div>
+
+</div>

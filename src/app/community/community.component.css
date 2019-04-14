@@ -1,0 +1,15 @@
+mat-grid-tile {
+  background: rgb(27, 94, 240);
+}
+
+mat-card{
+    width:25%;
+    float:left;
+    background: rgb(27, 162, 240);
+    height: 100px;
+}
+button{
+    text-align: center;
+    padding: 30px;
+    font-size: 40px;
+}

@@ -1,0 +1,60 @@
+table{
+    border-color: gray;
+    border-collapse: separate;
+    border-spacing: 2px;
+}
+
+tr{
+    height:200px;
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+td{
+    vertical-align:top;
+    line-height: 1.83em;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.left{
+    /*width: 180px;*/
+    width: 25%;
+    background-color: rgb(97, 159, 252);
+}
+.right{
+    padding-top:1px;
+    /*width:500px*/
+    width:75%;
+    background-color: rgb(172, 201, 255);
+}
+.title{
+    font-size:30px;
+}
+.time{
+    font-size: 15px;
+    float: right;
+}
+
+tbody{
+    display:table-row-group;
+    vertical-align: center;
+}
+h3{
+    margin-top: 0%;
+}
+.responseTitle{
+    font-size: 20px;
+    padding-left: 5px;
+}
+textarea
+{
+    font-family: Verdana, Tahoma, Arial, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
+    width: 98%;
+    height: 25em;
+    line-height: 1.583em;
+    background-color: rgb(221, 241, 247);
+}
+.mat-card{
+    width:50%;
+}
