@@ -4,6 +4,7 @@ import { Location } from "@angular/common";
 
 import { Post } from "../model/PostModel";
 import { PostService } from "../post.service";
+import { PostComponent } from "../post/post.component";
 
 @Component({
   selector: 'app-post-detail',
@@ -14,50 +15,46 @@ import { PostService } from "../post.service";
 export class PostDetailComponent implements OnInit {
 
   post: Post;
-  responsePosts:Post[];
-  now:Date;
+  responsePosts: Post[];
+  parentId: string;
+  community: string;
 
   constructor(
     private postService: PostService,
     private router: ActivatedRoute,
-    private location:Location
+    private location: Location,
+    //private postComponent:PostComponent
   ) { }
 
   ngOnInit() {
+    this.parentId = this.router.snapshot.paramMap.get('id');
     this.getPost();
     this.getResponse();
+    this.community = this.router.snapshot.paramMap.get('community');
+    console.log(this.community);
   }
 
+  //请求当前的第一个帖子
   getPost(): void {
-    const id = this.router.snapshot.paramMap.get('id');
-    this.postService.getPostDetail(id).subscribe(post => this.post = post);
+    this.postService.getPosts(this.parentId).subscribe(post => this.post = post.find(post => post.id == this.parentId));
   }
 
-  getResponse():void{
-    const id = this.router.snapshot.paramMap.get('id');
-    this.postService.getPosts().subscribe(posts => this.responsePosts = posts.filter(post =>post.parentId==id));
-    //this.postService.getPostDetialResponse(id).subscribe(posts => this.responsePosts = posts);
+  //请求当前第一个帖子的所有回帖
+  getResponse(): void {
+    this.postService.getResPosts(this.parentId).subscribe(posts => this.responsePosts = posts);
     console.log("我请求了，鬼知道有没有拿到");
   }
 
-  commit(content:string,initTime:string):void{
-    content=content.trim();
-    const parentId = this.router.snapshot.paramMap.get('id');
-    this.now = new Date();
-    initTime = this.now.getFullYear() + "-";
-    if (this.now.getMonth() < 10)
-      initTime += "0" + (this.now.getMonth() + 1) + "-";
-    else
-      initTime += (this.now.getMonth() + 1) + "-";
-    if (this.now.getDate() < 10)
-      initTime += "0" + this.now.getDate();
-    else
-      initTime += this.now.getDate();
-    this.postService.addPost({content, initTime,parentId } as Post).subscribe(post => this.responsePosts.push(post));
+  //回帖
+  commit(content: string): void {
+    content = content.trim();
+    const parentId = this.parentId;
+    const community =this.community;
+    this.postService.addPost({ content, parentId, community } as Post).subscribe(post => this.responsePosts.push(post));
     alert("回帖成功 ");
   }
 
-  goBack():void{
+  goBack(): void {
     this.location.back();
   }
 

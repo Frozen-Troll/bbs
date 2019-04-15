@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
 
 import { Post } from "../model/PostModel";
 import { PostService } from "../post.service";
-import { forEach } from '@angular/router/src/utils/collection';
+
 
 @Component({
   selector: 'app-post',
@@ -12,47 +13,40 @@ import { forEach } from '@angular/router/src/utils/collection';
 export class PostComponent implements OnInit {
 
   posts: Post[];
-  initTime: string[];
-  now: Date;
+  topposts:Post[];
+  community:string;
 
   constructor(
-    private postService: PostService
+    private postService: PostService,
+    private router: ActivatedRoute,
   ) { }
 
   ngOnInit() {
+    this.community = this.router.snapshot.paramMap.get('community');
     this.getPosted();
+    this.getTopposts();
     //this.now=new Date;
     //console.log(this.now.getMonth());
     console.log("我出生了");
-    /*
-    this.posts.sort(
-      function(obj1,obj2):number{
-        return obj1.lastUpdateTime-obj2.lastUpdateTime;
-    });*/
-    //this.posts.filter(post =>post.parentId!=null);
   }
 
-
+  //请求当前板块内所有帖子
   getPosted(): void {
-    this.postService.getPosts().subscribe(posts => this.posts = posts.filter(post => post.parentId == null));
-    console.log();
+    this.postService.getPosts(this.community).subscribe(posts => this.posts = posts);
+  }
+  //请求当前板块内置顶帖子
+  getTopposts():void{
+    this.postService.getTopposts(this.community).subscribe(posts => this.topposts = posts);
   }
 
-  pullPost(title: string, content: string, initTime: string): void {
+  
+  //发帖
+  pullPost(title: string, content: string): void {
     title = title.trim();
     content = content.trim();
-    this.now = new Date();
-    initTime = this.now.getFullYear() + "-";
-    if (this.now.getMonth() < 10)
-      initTime += "0" + (this.now.getMonth() + 1) + "-";
-    else
-      initTime += (this.now.getMonth() + 1) + "-";
-    if (this.now.getDate() < 10)
-      initTime += "0" + this.now.getDate();
-    else
-      initTime += this.now.getDate();
+    const community=this.community;
     if (!title) { return; }
-    this.postService.addPost({ title, content, initTime } as Post).subscribe(post => { this.posts.push(post) });
+    this.postService.addPost({ title, content, community } as Post).subscribe(post => { this.posts.push(post) });
     alert("发帖成功 ");
   }
 

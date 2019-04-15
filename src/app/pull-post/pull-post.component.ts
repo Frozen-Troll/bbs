@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
 import { Post } from "../model/PostModel";
 import { PostService } from "../post.service";
-import { PostComponent } from "../post/post.component";
 
 @Component({
   selector: 'app-pull-post',
@@ -12,34 +12,29 @@ import { PostComponent } from "../post/post.component";
 })
 export class PullPostComponent implements OnInit {
 
-  private now:Date;
+  community:string;
 
   constructor(
     private postService:PostService,
-    private location: Location
+    private location: Location,
+    private router: ActivatedRoute
     ) { }
 
   ngOnInit() {
+    this.community = this.router.snapshot.paramMap.get('community');
+    //this.community=this.postComponent.community;
+    console.log(this.community);
   }
 
 
-  pullPost(title: string, content: string, initTime: string): void {
+  pullPost(title: string, content: string): void {
     title = title.trim();
     content = content.trim();
-    this.now = new Date();
-    initTime = this.now.getFullYear() + "-";
-    if (this.now.getMonth() < 10)
-      initTime += "0" + (this.now.getMonth() + 1) + "-";
-    else
-      initTime += (this.now.getMonth() + 1) + "-";
-    if (this.now.getDate() < 10)
-      initTime += "0" + this.now.getDate();
-    else
-      initTime += this.now.getDate();
+    const community=this.community;
     if (!title) { return; }
-    this.postService.addPost({ title, content, initTime } as Post).subscribe(post => {console.log(post.id)});
+    this.postService.addPost({ title, content, community } as Post).subscribe(() => {this.location.back() });
     alert("发帖成功 ");
-    this.goBack();
+    this.goBack();  
   }
 
   goBack():void{

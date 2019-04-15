@@ -1,3 +1,6 @@
 export class Community{
-    private _name: string;
+    public name: string;
+    public id:string;
+    public visibility:boolean;
+    //public managers:HashSet<string>;
 }

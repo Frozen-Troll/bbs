@@ -9,8 +9,17 @@
         </mat-card-content>
       </mat-card>
     </li>
+    <li *ngFor="let toppost of topposts">
+      <mat-card tabindex="0" routerLink="/post/{{toppost.id}}" style="background:rgb(120, 196, 243)">
+        <mat-card-content>
+          <span>{{toppost.title}}</span>
+          <span style="float:right">{{toppost.initTime}}</span>
+        </mat-card-content>
+      </mat-card>
+    </li>
+    <mat-divider></mat-divider>
     <li *ngFor="let post of posts">
-      <mat-card tabindex="0" routerLink="/detail/{{post.id}}" style="background:rgb(120, 196, 243)">
+      <mat-card tabindex="0" routerLink="/post/{{post.id}}" style="background:rgb(120, 196, 243)">
         <mat-card-content>
           <span>{{post.title}}</span>
           <span style="float:right">{{post.initTime}}</span>
@@ -19,7 +28,7 @@
     </li>
   </ul>
   <div>
-    <button mat-raised-button color="primary" routerLink="/post/pull">发帖</button>
+    <button mat-raised-button color="primary" routerLink="/community/{{community}}/pullpost">发帖</button>
   </div>
   <hr />
   <div>
@@ -28,7 +37,7 @@
     <p>正文</p>
     <textarea #postContent></textarea>
     <button mat-raised-button color="primary"
-      (click)="pullPost(postTitle.value,postContent.value,postContent.value)">发表新帖</button>
+      (click)="pullPost(postTitle.value,postContent.value);postTitle.value='';postContent.value=''">发表新帖</button>
     <button mat-raised-button color="primary" (click)="goBack()">返回</button>
   </div>
 </div>

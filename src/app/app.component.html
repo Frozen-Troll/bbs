@@ -7,10 +7,13 @@
     <div>
         <ul>
           <li><button mat-raised-button color="primary" routerLink="/homepage">开花论坛</button></li>
-          <li><button mat-raised-button color="primary" routerLink="/post">论坛</button></li>
           <li><button mat-raised-button color="primary" routerLink="/community">板块</button></li>
-          <li style="float:right"><button mat-raised-button color="primary" routerLink="/register">注册</button></li>
-          <li style="float:right"><button mat-raised-button color="primary" routerLink="/login">登录</button></li>
+          <li style="float:right" *ngIf="!islogin">
+            <button mat-raised-button color="primary" routerLink="/register">注册</button>
+          </li>
+          <li style="float:right" *ngIf="!islogin">
+            <button mat-raised-button color="primary" routerLink="/login">登录</button>
+          </li>
         </ul>
     </div>
     <hr />

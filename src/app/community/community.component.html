@@ -1,16 +1,31 @@
 <div>
-  <!--
-  <mat-grid-list cols='3' rowHeight="2:1">
-    <mat-grid-tile>板块1</mat-grid-tile>
-    <mat-grid-tile>板块2</mat-grid-tile>
-    <mat-grid-tile>板块3</mat-grid-tile>
-    <mat-grid-tile>板块4</mat-grid-tile>
-    <mat-grid-tile>板块5</mat-grid-tile>
-    <mat-grid-tile>板块6</mat-grid-tile>
+  <p>板块一览</p>
+</div>
+<div class="top">
+  <mat-grid-list cols='3' rowHeight="2:1" role="list">
+    <div class="grid" role="listitem">
+      <mat-grid-tile *ngFor="let community of communities" routerLink="/community/{{community.id}}">
+        {{community.name}}
+      </mat-grid-tile>
+    </div>
   </mat-grid-list>
-  -->
-  <mat-card tabindex="0"><button mat-button routerLink="/post">风土人情</button></mat-card>
-  <mat-divider [vertical]="true" [inset]="true"></mat-divider>
-  <mat-card tabindex="0"><button mat-button routerLink="/post">网络游戏</button></mat-card>
-  <mat-card tabindex="0"><button mat-button routerLink="/post">编程交流</button></mat-card>
+  <!--
+  <ul>
+    <li>
+      <mat-card style="background:rgb(27, 158, 240)">
+        <mat-card-content>
+          <span>板块名称</span>
+          <span style="float:right">开贴时间</span>
+        </mat-card-content>
+      </mat-card>
+    </li>
+    <li *ngFor="let community of communities">
+      <mat-card tabindex="0" routerLink="/community/{{community.id}}" style="background:rgb(120, 196, 243)">
+        <mat-card-content>
+          <span>{{community.name}}</span>
+        </mat-card-content>
+      </mat-card>
+    </li>
+  </ul>
+    -->
 </div>

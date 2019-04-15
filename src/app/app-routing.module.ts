@@ -12,12 +12,13 @@ import { CommunityComponent } from "./community/community.component";
 const routes: Routes = [
   {path: '', redirectTo:'/homepage',pathMatch: "full"},
   {path: 'homepage',component: HomepageComponent},
+  {path: 'community',component:CommunityComponent},
   {path: 'login',component: LoginComponent},
-  {path: 'post',component: PostComponent},
-  {path: 'detail/:id', component: PostDetailComponent},
-  {path: 'post/pull',component: PullPostComponent},
   {path: 'register',component: RegisterComponent},
-  {path: 'community',component:CommunityComponent}
+  {path: 'community/:community',component: PostComponent},
+  {path: 'community/:community/pullpost',component: PullPostComponent},
+  {path: 'community/:community/post/:id', component: PostDetailComponent},
+
 ];
 
 @NgModule({

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { InMemoryDbService } from "angular-in-memory-web-api";
 import { Post } from "./model/PostModel";
+import { Community } from "./model/CommunityModel";
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,15 @@ export class InMemoryDataService implements InMemoryDbService{
       {id: 3,author:'yym',initTime:'2019-04-11',content:"那我们要当心哦",parentId:1},
       {id: 4,author:'犹豫，就会败北',initTime:'2019-04-12',content:"什么？我就在A市我怎么不知道",parentId:1}
     ];
-
-    return {posts};
+    const communities =[
+      {name:"java",id:"123123"},
+      {name:"js",id:"12331243"},
+      {name:"ts",id:"12331"},
+      {name:"C",id:"123313"},
+      {name:"C++",id:"121243"},
+      {name:"C#",id:"1233"}
+    ];
+    return {communities};
   }
   
   constructor() { }
