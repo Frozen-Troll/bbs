@@ -4,6 +4,7 @@ import { Location } from "@angular/common";
 
 import { Post } from "../model/PostModel";
 import { PostService } from "../post.service";
+import { AppComponent } from "../app.component";
 
 @Component({
   selector: 'app-pull-post',
@@ -12,13 +13,14 @@ import { PostService } from "../post.service";
 })
 export class PullPostComponent implements OnInit {
 
-  community:string;
+  community: string;
 
   constructor(
-    private postService:PostService,
+    private postService: PostService,
     private location: Location,
-    private router: ActivatedRoute
-    ) { }
+    private router: ActivatedRoute,
+    private app:AppComponent
+  ) { }
 
   ngOnInit() {
     this.community = this.router.snapshot.paramMap.get('community');
@@ -27,17 +29,20 @@ export class PullPostComponent implements OnInit {
   }
 
 
+  //http发帖
   pullPost(title: string, content: string): void {
     title = title.trim();
     content = content.trim();
-    const community=this.community;
+    const community = this.community;
+    const author =this.app.user.username;
     if (!title) { return; }
-    this.postService.addPost({ title, content, community } as Post).subscribe(() => {this.location.back() });
-    alert("发帖成功 ");
-    this.goBack();  
+    this.postService.addPost({ title, content, community, author } as Post).subscribe(() => {
+      this.location.back();
+      alert("发帖成功 ");
+    });
   }
 
-  goBack():void{
+  goBack(): void {
     this.location.back();
   }
 

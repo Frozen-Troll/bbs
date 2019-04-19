@@ -11,10 +11,16 @@ tr{
     border-color: inherit;
 }
 td{
+    position: relative;
     vertical-align:top;
     line-height: 1.83em;
     word-wrap: break-word;
     word-break: break-all;
+}
+.edit{
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
 .left{
@@ -57,4 +63,7 @@ textarea
 }
 .mat-card{
     width:50%;
+}
+.comment_icon{
+    font-size: 20px;
 }

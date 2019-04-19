@@ -1,0 +1,50 @@
+<div>
+  <div>
+    <p>用户名：{{user.username}}</p>
+    <hr />
+    <p>个性签名：{{user.signature}}</p>
+  </div>
+  <hr />
+  <button mat-raised-button (click)="showMain()">显示历史发帖</button>
+  <button mat-raised-button (click)="showComment()">显示历史回帖</button>
+
+  <ul *ngIf="showWhat">
+    <li>
+      <mat-card style="background:rgb(27, 158, 240)">
+        <mat-card-content>
+          <span>标题</span>
+          <span style="float:right">开贴时间</span>
+        </mat-card-content>
+      </mat-card>
+    </li>
+    <li *ngFor="let userPost of userCommentPosts">
+      <mat-card tabindex="0" routerLink="/community/{{userPost.community}}/post/{{userPost.parentid}}"
+        style="background:rgb(120, 196, 243)">
+        <mat-card-content>
+          <span>{{userPost.title}}</span>
+          <span style="float:right">{{userPost.initTime}}</span>
+        </mat-card-content>
+      </mat-card>
+    </li>
+  </ul>
+
+  <ul *ngIf="!showWhat">
+    <li>
+      <mat-card style="background:rgb(27, 158, 240)">
+        <mat-card-content>
+          <span>标题</span>
+          <span style="float:right">开贴时间</span>
+        </mat-card-content>
+      </mat-card>
+    </li>
+    <li *ngFor="let userPost of userMainPosts">
+      <mat-card tabindex="0" routerLink="/community/{{userPost.community}}/post/{{userPost.id}}"
+        style="background:rgb(120, 196, 243)">
+        <mat-card-content>
+          <span>{{userPost.title}}</span>
+          <span style="float:right">{{userPost.initTime}}</span>
+        </mat-card-content>
+      </mat-card>
+    </li>
+  </ul>
+</div>

@@ -4,14 +4,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService }  from './in-memory-data.service';
+//import { InMemoryDataService }  from './in-memory-data.service';
 import { 
   MatButtonModule,
   MatFormFieldModule,
   MatInputModule,
   MatCardModule,
   MatDividerModule,
-  MatGridListModule
+  MatGridListModule,
+  MatSidenavModule,
+  MatIconModule,
+  MatTableModule,
+  MatPaginatorModule,
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from "@auth0/angular-jwt";
@@ -25,6 +29,9 @@ import { CommunityComponent } from './community/community.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { PullPostComponent } from './pull-post/pull-post.component';
 import { RegisterComponent } from './register/register.component';
+import { PutPostComponent } from './put-post/put-post.component';
+import { BackgroundComponent } from './background/background.component';
+import { UserCenterComponent } from './user-center/user-center.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -39,7 +46,10 @@ export function tokenGetter() {
     CommunityComponent,
     HomepageComponent,
     PullPostComponent,
-    RegisterComponent
+    RegisterComponent,
+    PutPostComponent,
+    BackgroundComponent,
+    UserCenterComponent
   ],
   imports: [
     JwtModule.forRoot({
@@ -55,15 +65,19 @@ export function tokenGetter() {
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(
+    /*HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
-    ),
+    ),*/
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
     MatDividerModule,
-    MatGridListModule
+    MatGridListModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

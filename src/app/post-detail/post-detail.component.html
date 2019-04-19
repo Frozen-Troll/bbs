@@ -2,6 +2,7 @@
 <button mat-raised-button color="primary" (click)="goBack()" style="float:right">返回</button>
 <table style="width:100%">
   <tbody>
+    <!--主题帖模块-->
     <div>
       <tr>
         <td style="vertical-align:top" class="left">
@@ -21,10 +22,15 @@
             <span style="font-size:15px">{{post.initTime}}</span>
           </div>
           <span>{{post.content}}</span>
+          <button class="edit" mat-raised-button *ngIf='this.app.user.name==post.author||isAdmin()'
+            routerLink="/community/{{community}}/putpost/{{post.id}}" (click)="editParentPost()">修改主题帖
+          </button>
         </td>
       </tr>
       <mat-divider style="width:100%"></mat-divider>
     </div>
+
+    <!--回帖模块-->
     <div *ngFor="let posts of responsePosts">
       <tr>
         <td style="vertical-align:top" class="left">
@@ -37,6 +43,9 @@
         <mat-divider [vertical]="true">
         </mat-divider>
         <td class="right">
+          <div *ngIf="isAdmin()||this.app.user.username==posts.author">
+            <button mat-button (click)="startEditMode(posts)"><a href="#res">修改</a></button>
+          </div>
           <div style="text-align:right">
             <span style="font-size:15px">{{posts.initTime}}</span>
           </div>
@@ -48,18 +57,24 @@
   </tbody>
 </table>
 <hr />
-<div name="res" id="res">
+<div><a name="res" id="res"></a>
   <div style="padding-top:40px">
     <mat-card tabindex="0" style="background:rgb(120, 196, 243)" class="mat-card">
-      <mat-card-content >
-        <img src="../../assets/icon/pen.png" width="20" height="20"/>
-        <span class="responseTitle">发表回复</span>
+      <mat-card-content>
+        <div class="comment_icon">
+          <mat-icon [inline]="true">add_comment</mat-icon>
+        </div>
+        <span class="responseTitle" *ngIf="!this.resMode">发表回复</span>
+        <span class="responseTitle" *ngIf="this.resMode">修改回复</span>
       </mat-card-content>
     </mat-card>
   </div>
   <textarea #content></textarea>
-  <div style="text-align:center">  
-    <button mat-raised-button color="primary" (click)="commit(content.value,content.value)">提交</button>
+  <div style="text-align:center" *ngIf="!this.resMode">
+    <button mat-raised-button color="primary" (click)="commit(content.value)">提交</button>
+  </div>
+  <div style="text-align:center" *ngIf="this.resMode">
+    <button mat-raised-button color="primary" (click)="edit(content.value)">确认修改</button>
   </div>
 
 </div>

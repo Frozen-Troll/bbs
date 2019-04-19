@@ -10,7 +10,7 @@
       </mat-card>
     </li>
     <li *ngFor="let toppost of topposts">
-      <mat-card tabindex="0" routerLink="/post/{{toppost.id}}" style="background:rgb(120, 196, 243)">
+      <mat-card tabindex="0" routerLink="/community/{{community}}/post/{{toppost.id}}" style="background:rgb(99, 193, 252)">
         <mat-card-content>
           <span>{{toppost.title}}</span>
           <span style="float:right">{{toppost.initTime}}</span>
@@ -18,19 +18,27 @@
       </mat-card>
     </li>
     <mat-divider></mat-divider>
-    <li *ngFor="let post of posts">
-      <mat-card tabindex="0" routerLink="/post/{{post.id}}" style="background:rgb(120, 196, 243)">
+    <li *ngFor="let post of nowposts">
+      <mat-card tabindex="0" routerLink="/community/{{community}}/post/{{post.id}}" style="background:rgb(120, 196, 243)">
         <mat-card-content>
           <span>{{post.title}}</span>
           <span style="float:right">{{post.initTime}}</span>
+          <button mat-button *ngIf="isAdmin()" (click)="topThePost(post)">置顶</button>
+          <button mat-button *ngIf="this.editMode" (click)="deletePost(post)">删除</button>
         </mat-card-content>
       </mat-card>
     </li>
   </ul>
+  <button *ngIf="nowPage>0" (click)="prePage()">上一页</button>
+  <button style="float:right" (click)="nextPage()">下一页</button>
+  <!-- <mat-paginator color="primary" [length]="200" [pageSize]="10" (page)="pageEvent =changePage($event)">
+  </mat-paginator> -->
   <div>
     <button mat-raised-button color="primary" routerLink="/community/{{community}}/pullpost">发帖</button>
+    <button mat-raised-button color="primary" (click)="startEditMode()" *ngIf="isAdmin()">删帖</button>
   </div>
   <hr />
+  <!--
   <div>
     <p>标题</p>
     <input #postTitle />
@@ -40,4 +48,5 @@
       (click)="pullPost(postTitle.value,postContent.value);postTitle.value='';postContent.value=''">发表新帖</button>
     <button mat-raised-button color="primary" (click)="goBack()">返回</button>
   </div>
+  -->
 </div>

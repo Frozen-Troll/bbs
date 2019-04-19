@@ -1,23 +1,66 @@
 <!DOCTYPE html>
 <html style="background:rgb(224, 254, 255)">
-  <head>
 
-  </head>
-  <body>
-    <div>
-        <ul>
-          <li><button mat-raised-button color="primary" routerLink="/homepage">开花论坛</button></li>
-          <li><button mat-raised-button color="primary" routerLink="/community">板块</button></li>
-          <li style="float:right" *ngIf="!islogin">
-            <button mat-raised-button color="primary" routerLink="/register">注册</button>
-          </li>
-          <li style="float:right" *ngIf="!islogin">
-            <button mat-raised-button color="primary" routerLink="/login">登录</button>
-          </li>
-        </ul>
-    </div>
-    <hr />
+<head>
 
-    <router-outlet></router-outlet>
-  </body>
+</head>
+
+<body style="height:100%">
+  <mat-drawer-container class="drawer_container" [hasBackdrop]="False">
+
+    <mat-drawer #drawer style="background:rgb(224, 254, 255)">
+      <div style="text-align:center">
+        <div class="person_icon">
+          <mat-icon [inline]="true">person</mat-icon>
+        </div>
+        <!--<img src="../assets/icon/head.svg" width="50%" height="50%" />-->
+      </div>
+      <div *ngIf="islogin" style="text-align:center">
+        <p>{{user.username}}</p>
+      </div>
+      <div *ngIf="!islogin" style="text-align:center">
+        <button mat-raised-button color="primary" routerLink="/login" (click)="drawer.close()">登录</button>
+        <button mat-raised-button color="primary" routerLink="/register" (click)="drawer.close()">注册</button>
+      </div>
+      <div *ngIf="islogin" style="text-align:center">
+        <button mat-raised-button color="primary" routerLink="/user/{{user.username}}">用户中心</button>
+        <button mat-raised-button color="primary" (click)="drawer.close();logout()">注销</button>
+      </div>
+      <div *ngIf="isAdmin()" style="text-align:center">
+        <button mat-raised-button color="primary" routerLink="/background" (click)="drawer.close()">管理员后台</button>
+      </div>
+
+      <hr />
+      <!--板块部分-->
+      <p>板块列表：</p>
+      <div *ngFor="let community of communities" (click)="drawer.close()" routerLink="/community/{{community.id}}"
+        style="text-align:center">
+        <a mat-raised-button>{{community.name}}</a>
+      </div>
+      <!--
+      <div *ngIf="isAdmin()">
+        <button mat-raised-button routerLink="/community" (click)="drawer.close()">板块编辑</button>
+      </div>
+      -->
+    </mat-drawer>
+
+    <mat-drawer-content style="height: 1080px">
+      <mat-sidenav-container style="background:rgb(224, 254, 255)">
+        <mat-sidenav>Start</mat-sidenav>
+        <mat-sidenav-content>
+          <button mat-raised-button color="primary" (click)="drawer.toggle()">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <button mat-raised-button color="primary" routerLink="/homepage" style="float:right">
+            <mat-icon>home</mat-icon>
+          </button>
+        </mat-sidenav-content>
+      </mat-sidenav-container>
+      <hr />
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+
+</body>
+
 </html>

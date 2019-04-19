@@ -1,0 +1,21 @@
+body
+{
+    height: 100%;
+}
+p
+{
+    font-family: Verdana, Tahoma, Arial, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
+}
+input
+{
+    width: 98%;
+    background-color: rgb(221, 241, 247);
+}
+textarea
+{
+    font-family: Verdana, Tahoma, Arial, "Microsoft YaHei", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
+    width: 98%;
+    height: 25em;
+    line-height: 1.583em;
+    background-color: rgb(221, 241, 247);
+}

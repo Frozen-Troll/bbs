@@ -1,0 +1,9 @@
+<div>
+    <p>标题</p>
+    <input #postTitle [(ngModel)]="post.title"/>
+    <p>正文</p>
+    <textarea #postContent>{{post.content}}</textarea>
+    <button mat-raised-button color="primary"
+      (click)="putPost(postTitle.value,postContent.value,postContent.value)">确定修改</button>
+    <button mat-raised-button color="primary" (click)="goBack()">返回</button>
+  </div>

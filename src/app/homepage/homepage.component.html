@@ -2,7 +2,23 @@
   <h2 style="text-align:center">
     欢迎来到开花论坛
   </h2>
-  <div style="text-align:center">
-    <img src="../../assets/bg1.jpg" alt="poi~poi~" />
-  </div>
+  <ul>
+    <li>
+      <mat-card style="background:rgb(27, 158, 240)">
+        <mat-card-content>
+          <span>热帖列表</span>
+          <span style="float:right">开贴时间</span>
+        </mat-card-content>
+      </mat-card>
+    </li>
+    <li *ngFor="let hotPost of hotPosts">
+      <mat-card tabindex="0" routerLink="/community/{{hotPost.community}}/post/{{hotPost.id}}"
+        style="background:rgb(120, 196, 243)">
+        <mat-card-content>
+          <span>{{hotPost.title}}</span>
+          <span style="float:right">{{hotPost.initTime}}</span>
+        </mat-card-content>
+      </mat-card>
+    </li>
+  </ul>
 </div>

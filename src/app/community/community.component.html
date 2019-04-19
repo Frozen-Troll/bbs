@@ -2,6 +2,7 @@
   <p>板块一览</p>
 </div>
 <div class="top">
+  <!--
   <mat-grid-list cols='3' rowHeight="2:1" role="list">
     <div class="grid" role="listitem">
       <mat-grid-tile *ngFor="let community of communities" routerLink="/community/{{community.id}}">
@@ -9,13 +10,12 @@
       </mat-grid-tile>
     </div>
   </mat-grid-list>
-  <!--
+  -->
   <ul>
     <li>
       <mat-card style="background:rgb(27, 158, 240)">
         <mat-card-content>
           <span>板块名称</span>
-          <span style="float:right">开贴时间</span>
         </mat-card-content>
       </mat-card>
     </li>
@@ -23,9 +23,9 @@
       <mat-card tabindex="0" routerLink="/community/{{community.id}}" style="background:rgb(120, 196, 243)">
         <mat-card-content>
           <span>{{community.name}}</span>
+          <button mat-raised-button style="float:right">编辑板块</button>
         </mat-card-content>
       </mat-card>
     </li>
   </ul>
-    -->
 </div>

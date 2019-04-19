@@ -8,6 +8,9 @@ import { HomepageComponent } from "./homepage/homepage.component";
 import { PullPostComponent } from "./pull-post/pull-post.component";
 import { RegisterComponent } from "./register/register.component";
 import { CommunityComponent } from "./community/community.component";
+import { PutPostComponent } from './put-post/put-post.component';
+import { BackgroundComponent } from './background/background.component';
+import { UserCenterComponent } from './user-center/user-center.component';
 
 const routes: Routes = [
   {path: '', redirectTo:'/homepage',pathMatch: "full"},
@@ -17,7 +20,10 @@ const routes: Routes = [
   {path: 'register',component: RegisterComponent},
   {path: 'community/:community',component: PostComponent},
   {path: 'community/:community/pullpost',component: PullPostComponent},
+  {path: 'community/:community/putpost/:id',component: PutPostComponent},
   {path: 'community/:community/post/:id', component: PostDetailComponent},
+  {path: 'background', component: BackgroundComponent},
+  {path: 'user/:username', component:UserCenterComponent}
 
 ];
 

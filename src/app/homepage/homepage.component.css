@@ -3,3 +3,7 @@ p
     text-align: center;
     background-color: skyblue;
 }
+ul
+{
+    list-style-type: none;
+}
